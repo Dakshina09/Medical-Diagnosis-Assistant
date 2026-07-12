@@ -1,0 +1,172 @@
+{
+  "accuracy": 0.8745,
+  "f1_macro": 0.8741,
+  "n_train": 4400,
+  "n_test": 1100,
+  "n_classes": 25,
+  "classification_report": {
+    "Allergic Rhinitis": {
+      "precision": 0.9130434782608695,
+      "recall": 0.9545454545454546,
+      "f1-score": 0.9333333333333333,
+      "support": 44.0
+    },
+    "Anemia": {
+      "precision": 0.6909090909090909,
+      "recall": 0.8636363636363636,
+      "f1-score": 0.7676767676767676,
+      "support": 44.0
+    },
+    "Asthma": {
+      "precision": 0.851063829787234,
+      "recall": 0.9090909090909091,
+      "f1-score": 0.8791208791208791,
+      "support": 44.0
+    },
+    "Bronchitis": {
+      "precision": 0.8181818181818182,
+      "recall": 0.8181818181818182,
+      "f1-score": 0.8181818181818182,
+      "support": 44.0
+    },
+    "COVID-19": {
+      "precision": 0.9090909090909091,
+      "recall": 0.9090909090909091,
+      "f1-score": 0.9090909090909091,
+      "support": 44.0
+    },
+    "Chickenpox": {
+      "precision": 0.9318181818181818,
+      "recall": 0.9318181818181818,
+      "f1-score": 0.9318181818181818,
+      "support": 44.0
+    },
+    "Common Cold": {
+      "precision": 0.975609756097561,
+      "recall": 0.9090909090909091,
+      "f1-score": 0.9411764705882353,
+      "support": 44.0
+    },
+    "Dengue Fever": {
+      "precision": 0.8913043478260869,
+      "recall": 0.9318181818181818,
+      "f1-score": 0.9111111111111111,
+      "support": 44.0
+    },
+    "Food Poisoning": {
+      "precision": 0.7777777777777778,
+      "recall": 0.7954545454545454,
+      "f1-score": 0.7865168539325843,
+      "support": 44.0
+    },
+    "GERD": {
+      "precision": 0.9333333333333333,
+      "recall": 0.9545454545454546,
+      "f1-score": 0.9438202247191011,
+      "support": 44.0
+    },
+    "Gastroenteritis": {
+      "precision": 0.825,
+      "recall": 0.75,
+      "f1-score": 0.7857142857142857,
+      "support": 44.0
+    },
+    "Hypertension": {
+      "precision": 0.9428571428571428,
+      "recall": 0.75,
+      "f1-score": 0.8354430379746836,
+      "support": 44.0
+    },
+    "Hyperthyroidism": {
+      "precision": 0.9090909090909091,
+      "recall": 0.9090909090909091,
+      "f1-score": 0.9090909090909091,
+      "support": 44.0
+    },
+    "Hypothyroidism": {
+      "precision": 0.925,
+      "recall": 0.8409090909090909,
+      "f1-score": 0.8809523809523809,
+      "support": 44.0
+    },
+    "Influenza (Flu)": {
+      "precision": 0.9024390243902439,
+      "recall": 0.8409090909090909,
+      "f1-score": 0.8705882352941177,
+      "support": 44.0
+    },
+    "Irritable Bowel Syndrome": {
+      "precision": 0.8260869565217391,
+      "recall": 0.8636363636363636,
+      "f1-score": 0.8444444444444444,
+      "support": 44.0
+    },
+    "Malaria": {
+      "precision": 0.8888888888888888,
+      "recall": 0.9090909090909091,
+      "f1-score": 0.898876404494382,
+      "support": 44.0
+    },
+    "Migraine": {
+      "precision": 0.875,
+      "recall": 0.7954545454545454,
+      "f1-score": 0.8333333333333334,
+      "support": 44.0
+    },
+    "Osteoarthritis": {
+      "precision": 0.9090909090909091,
+      "recall": 0.9090909090909091,
+      "f1-score": 0.9090909090909091,
+      "support": 44.0
+    },
+    "Pneumonia": {
+      "precision": 0.9285714285714286,
+      "recall": 0.8863636363636364,
+      "f1-score": 0.9069767441860465,
+      "support": 44.0
+    },
+    "Sinusitis": {
+      "precision": 0.8979591836734694,
+      "recall": 1.0,
+      "f1-score": 0.946236559139785,
+      "support": 44.0
+    },
+    "Tension Headache": {
+      "precision": 0.7435897435897436,
+      "recall": 0.6590909090909091,
+      "f1-score": 0.6987951807228916,
+      "support": 44.0
+    },
+    "Type 2 Diabetes": {
+      "precision": 0.8958333333333334,
+      "recall": 0.9772727272727273,
+      "f1-score": 0.9347826086956522,
+      "support": 44.0
+    },
+    "Typhoid Fever": {
+      "precision": 0.8043478260869565,
+      "recall": 0.8409090909090909,
+      "f1-score": 0.8222222222222222,
+      "support": 44.0
+    },
+    "Urinary Tract Infection": {
+      "precision": 0.9545454545454546,
+      "recall": 0.9545454545454546,
+      "f1-score": 0.9545454545454546,
+      "support": 44.0
+    },
+    "accuracy": 0.8745454545454545,
+    "macro avg": {
+      "precision": 0.8768173329489233,
+      "recall": 0.8745454545454545,
+      "f1-score": 0.8741175703789767,
+      "support": 1100.0
+    },
+    "weighted avg": {
+      "precision": 0.8768173329489233,
+      "recall": 0.8745454545454545,
+      "f1-score": 0.8741175703789767,
+      "support": 1100.0
+    }
+  }
+}
