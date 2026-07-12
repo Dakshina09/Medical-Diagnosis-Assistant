@@ -1,0 +1,16 @@
+.env
+__pycache__/
+*.pyc
+.venv/
+venv/
+.streamlit/
+.pytest_cache/
+*.egg-info/
+
+# Generated artifacts -- regenerate locally with:
+#   python data/generate_dataset.py
+#   python -m src.train_model
+# Kept out of git so the repo stays small and never re-hits GitHub's
+# 100MB file limit if the model grows (e.g. more estimators/classes later).
+data/dataset.csv
+models/*.joblib
