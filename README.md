@@ -120,20 +120,5 @@ medical-diagnosis-assistant/
    ```bash
    pytest tests/ -v
    ```
+https://medical-diagnosis-assistant-rkemrzy3nweuy9fal6oxzt.streamlit.app/
 
-## Talking points for interviews
-
-- Why a hybrid architecture instead of "just ask an LLM": determinism,
-  auditability (you can inspect exactly which symptoms drove the
-  prediction via feature importances), and cost/latency (classifier
-  inference is instant and free; the LLM call is only for framing).
-- Why synthetic data generation was chosen over scraping/downloading a
-  dataset, and how the noise-injection design avoids the model simply
-  memorizing exact symptom sets.
-- The separation of concerns between `src/predict.py` (deterministic ML)
-  and `src/llm_explainer.py` (LLM framing), and how that boundary makes
-  the system safer and easier to test.
-- Possible extensions: swap RandomForest for gradient boosting (XGBoost/
-  LightGBM) and compare metrics; add a real-world dataset with proper
-  licensing; add multi-turn follow-up questions before the final
-  prediction; add user auth + history with a database.
