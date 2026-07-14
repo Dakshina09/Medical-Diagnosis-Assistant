@@ -1,15 +1,58 @@
-# 🩺 Medical Diagnosis Assistant
+#  Medical Diagnosis Assistant
+
+
+
+** Live demo: [medical-diagnosis-assistant-rkemrzy3nweuy9fal6oxzt.streamlit.app](https://medical-diagnosis-assistant-rkemrzy3nweuy9fal6oxzt.streamlit.app/)**
 
 A hybrid **ML + LLM** symptom checker built as an AI Engineer portfolio project.
 
-A trained classifier makes the actual prediction from selected symptoms; a
-Groq-hosted LLM (Llama 3.3) then explains that prediction in plain,
-patient-friendly language. The two are kept separate on purpose — the
-model's probabilities are always visible and auditable, and the LLM's job
-is only to add clear explanation on top, not to invent a diagnosis.
+## The problem
+
+Most "AI symptom checker" demos just pipe user input straight into an LLM and
+call it a diagnosis — which is fast to build but impossible to audit or
+trust: you can't tell *why* the model said what it said, and the LLM is free
+to hallucinate a condition that doesn't fit the symptoms at all.
+
+## The approach
+
+This project separates the two concerns instead of collapsing them into one
+LLM call:
+
+- A **trained classifier** (scikit-learn RandomForest) makes the actual
+  prediction from selected symptoms. Its output is deterministic and
+  inspectable — you can always see exactly which symptoms drove which
+  probability.
+- A **Groq-hosted LLM** (Llama 3.3) takes that prediction and turns it into
+  plain-language explanation, self-care tips, and red-flag warnings. It
+  never gets to invent the diagnosis itself — only to explain one that
+  already came from the model.
 
 > ⚠️ **Disclaimer:** This is an educational demo, not a medical device. It
 > does not replace professional medical advice, diagnosis, or treatment.
+
+## Tech stack
+
+| Layer               | Technology                                   |
+|---------------------|-----------------------------------------------|
+| ML model            | scikit-learn (RandomForestClassifier)          |
+| LLM explanation      | Groq API — Llama 3.3 70B                       |
+| Frontend             | Streamlit + Plotly                             |
+| Data                 | Custom-generated symptom-disease dataset       |
+| Testing              | pytest                                         |
+| Deployment           | Streamlit Community Cloud                      |
+
+## How it works
+
+1. User checks off symptoms in the UI, grouped by category (General,
+   Respiratory, Digestive, Cardiovascular, etc.).
+2. The RandomForest classifier scores all 25 conditions and returns the
+   top 5 ranked by probability.
+3. The top prediction + differentials + selected symptoms are passed to
+   Groq's Llama 3.3, prompted to return **structured JSON only** (summary,
+   condition description, reasoning, self-care tips, red flags,
+   disclaimer) — never free-form prose that could drift off-topic.
+4. Streamlit renders a probability bar chart alongside the LLM's
+   explanation panel, with a persistent medical disclaimer banner.
 
 ## Architecture
 
@@ -27,30 +70,37 @@ Groq LLM (Llama 3.3)  ──►  plain-language explanation, self-care tips,
 Streamlit UI (charts + explanation panel)
 ```
 
+## Results
+
+| Metric                  | Value |
+|--------------------------|-------|
+| Test accuracy             | ~87.5% |
+| F1 score (macro)          | ~0.87 |
+| Conditions covered         | 25 |
+| Symptoms tracked           | 59 |
+| Training samples           | 5,500 |
+
 ## Features
 
-- **Trained ML classifier** (RandomForest, scikit-learn) predicting across
-  25 common conditions from 59 symptoms, ~88% test accuracy / 0.88 macro F1.
+- **Trained ML classifier** (RandomForest, scikit-learn) — see Results above.
 - **Synthetic but medically-informed dataset generator** (`data/generate_dataset.py`)
   that encodes real symptom-disease association patterns with realistic
   noise, rather than depending on an external download.
-- **LLM explanation layer** (`src/llm_explainer.py`) using Groq's fast Llama
-  3.3 API, prompted to return structured JSON: summary, condition
+- **LLM explanation layer** (`src/llm_explainer.py`) prompted to return
+  structured JSON only (no free-form prose): summary, condition
   description, why-this-prediction reasoning, self-care tips, and red-flag
-  "see a doctor if" warnings — kept separate from the diagnosis itself for
-  auditability.
-- **Interactive Streamlit UI**: symptoms grouped into categories
-  (General, Respiratory, Digestive, Cardiovascular, etc.), a probability bar
-  chart of the top candidate conditions (Plotly), and a persistent medical
-  disclaimer banner.
+  "see a doctor if" warnings.
+- **Interactive Streamlit UI**: symptoms grouped into categories, a
+  probability bar chart of top candidates (Plotly), and a persistent
+  medical disclaimer banner.
 - **Graceful degradation**: the ML prediction still works with no API key;
   only the LLM explanation panel requires `GROQ_API_KEY`.
 - **Model introspection**: saved accuracy/F1/per-class metrics and feature
-  importances (`models/metrics.json`, `models/feature_importance.json`),
-  surfaced in the sidebar.
+  importances, surfaced live in the sidebar.
 - **Unit tests** (pytest) covering the prediction pipeline.
 - Clean, modular structure (`data/`, `src/`, `models/`, `tests/`) with a
-  config module and `.env`-based secrets — no hardcoded keys.
+  config module and environment-based secrets (`.env` locally,
+  `st.secrets` on Streamlit Cloud) — no hardcoded keys.
 
 ## Project structure
 
@@ -76,6 +126,9 @@ medical-diagnosis-assistant/
 ```
 
 ## Setup (VS Code)
+
+> No setup needed to just try it — see the live demo link at the top. The
+> steps below are for running/editing it locally.
 
 1. **Open the folder in VS Code**: `File > Open Folder...` and select
    `medical-diagnosis-assistant/`.
@@ -120,5 +173,4 @@ medical-diagnosis-assistant/
    ```bash
    pytest tests/ -v
    ```
-https://medical-diagnosis-assistant-rkemrzy3nweuy9fal6oxzt.streamlit.app/
 
